@@ -15,12 +15,10 @@ int main( int argc, char** argv){
         new_array.add_element(34);
 
         arr = new_array;
-        for( short s{0}; s< arr.size(); ++s){
-            cout<< arr[s]<< endl;
-        }
+        for( short s{0}; s< arr.size(); ++s)
+            cout<< arr[s]<< endl; 
     } catch (exception& ex) {
         cerr<< ex.what()<< endl;
     }
-
     return 0;
 }

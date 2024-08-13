@@ -4,21 +4,22 @@
 class smart_array {
 public:
     int size();
-    void add_element(short int i);
-    int& get_element(short int i);                          //тоже что и operator[]
+    void add_element(short int value);
+    int& get_element(short int value); // Tоже что и operator[].
 
-    int& operator[](short int i);
-    smart_array& operator= (const smart_array& a);          //Копирующее присваивание
-    smart_array& operator= (smart_array&&)= default;        //Перемещающее присваивание
+    int& operator[](short int value);
+    smart_array& operator= (const smart_array& right); // Копирующее =.
+    smart_array& operator= (smart_array&&)= default;  // Перемещающее =.
 
-    smart_array(const smart_array &a);                      //Копирующий конструктор
-    smart_array(smart_array&&)= default;                    //Перемещающий конструктор
-    smart_array(short int i);
+    smart_array(const smart_array& right); // Копирующий конструктор.
+    smart_array(smart_array&&)= default;  // Перемещающий конструктор.
+    smart_array(short int value);
     smart_array();
     ~smart_array();
 private:
-    int* arr{nullptr};
-    short int elem{0}, count{0};
+    int* arr;
+    short int count;
+    short int elem;
 };
 
 #endif // SMART_ARRAY_H
