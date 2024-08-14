@@ -1,0 +1,15 @@
+# qtcreator generated files
+*.pro.user*
+CMakeLists.txt.user*
+
+# MinGW generated files
+*.Debug
+*.Release
+
+# catch2
+catch2/
+
+# Binaries
+# --------
+*.dll
+*.exe
