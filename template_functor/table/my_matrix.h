@@ -6,74 +6,38 @@
 
 
 template <class Type>
-class MatriXX{
+class Matrix{
 public:
-    class MatriYY{
-    public:
-        std::size_t size() const{
-            return arrY.size();
-        }
-        Type& operator[]( std::size_t index){
-            if(( index< 0)||( index>= arrY.size()))
-                throw std::out_of_range ("Array Index out of Bounds");
-            return arrY[ index ];
-        }
-        MatriYY( std::size_t size){
-            for( std::size_t i{0}; i< size; ++i)
-                arrY.push_back(0.0);
-        }
-        MatriYY( void)= default;
-        ~MatriYY()= default;
-    private:
-        std::vector< Type> arrY;
-    };
-    MatriYY& operator[]( std::size_t index){
+    std::vector<Type>& operator[]( const std::size_t index){
         if(( index< 0)||( index>= arrX.size()))
             throw std::out_of_range ("Array Index out of Bounds");
-        return arrX[ index];
+        return arrX.at(index);
     }
-    const Type& operator[]( const std::size_t index) const{
+    const std::vector<Type>& operator[]( const std::size_t index) const{
         if(( index< 0)||( index>= arrX.size()))
             throw std::out_of_range ("Array Index out of Bounds");
-        return arrX[ index];
+        return arrX.at(index);
     }
-
-    void print(){
-        for ( std::size_t i{0}; i< arrX.size(); ++i ){
-            for ( std::size_t j{0}; j< arrX[i].size(); ++j )
-                std::cout<< arrX[i][j]<< ' ';
-            std::cout<< std::endl;
-        }
-        std::cout<< std::endl;
-    }
+//    void print(){
+//        for ( std::size_t i{0}; i< arrX.size(); ++i ){
+//            for ( std::size_t j{0}; j< arrX[i].size(); ++j )
+//                std::cout<< arrX[i][j]<< ' ';
+//            std::cout<< std::endl;
+//        }
+//        std::cout<< std::endl;
+//    }
     std::size_t size() const{
-        return (xSize * ySize);
+        return (arrX.size()* arrY.size());
     }
-    MatriXX( std::size_t rows, std::size_t cols)
-        : xSize{ rows}, ySize{ cols}{
-        MatriYY m( cols);
+    Matrix( std::size_t rows, std::size_t cols){
+        for( std::size_t i{0}; i< cols; ++i)
+            arrY.push_back(0.0);
         for( std::size_t i{0}; i< rows; ++i)
-            arrX.push_back(m);
+            arrX.push_back(arrY);
     }
-    ~MatriXX()= default;
+    Matrix()= default;
+    ~Matrix()= default;
 private:
-    std::vector< MatriYY> arrX;
-    std::size_t xSize{0};
-    std::size_t ySize{0};
+    std::vector< std::vector<Type>> arrX;
+    std::vector< Type> arrY;
 };
-
-//    const char& operator[](std::size_t position) const{.
-//    ... // выполнить проверку границ массива.
-//    ... // протоколировать доступ к данным.
-//    ... // проверить целостность данных.
-//        return text[position];.
-//    }.
-//    char& operator[](std::size_t position) const{ // теперь вызываем const op[].
-//        return.
-//                const_cast( // из возвращаемого типа.
-//                            // op[] исключить const.
-//                            static_cast(*this) // добавить const типу.
-//                            // *this.
-//                            [position] // вызвать константную.
-//                            ); // версию op[].
-//    }. // Скотт Майерс.
